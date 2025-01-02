@@ -1,8 +1,4 @@
-﻿using Catalog.API.Models;
-using Marten;
-using Utilities.CQRS;
-
-namespace Catalog.API.GetProducts
+﻿namespace Catalog.API.GetProducts
 {
     public record GetProductsQuery() : IQuery<GetProductsResult>;
     public record GetProductsResult(IEnumerable<Product> Products);

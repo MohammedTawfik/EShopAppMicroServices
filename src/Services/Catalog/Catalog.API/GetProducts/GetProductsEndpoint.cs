@@ -1,8 +1,4 @@
-﻿using Catalog.API.Models;
-using Mapster;
-using MediatR;
-
-namespace Catalog.API.GetProducts
+﻿namespace Catalog.API.GetProducts
 {
     public record GetProductsResponse(IEnumerable<Product> Products);
     public static class GetProductsEndpoint

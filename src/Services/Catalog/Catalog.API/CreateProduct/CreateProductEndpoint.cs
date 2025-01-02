@@ -1,7 +1,4 @@
-﻿using Mapster;
-using MediatR;
-
-namespace Catalog.API.CreateProduct
+﻿namespace Catalog.API.CreateProduct
 {
     public record CreateCommandRequest(string Name, List<string> Categories, string Description, string ImagePath, decimal Price);
     public record CreateCommandResponse(Guid Id);

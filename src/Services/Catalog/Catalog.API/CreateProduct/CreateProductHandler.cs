@@ -1,8 +1,4 @@
-﻿using Catalog.API.Models;
-using Marten;
-using Utilities.CQRS;
-
-namespace Catalog.API.CreateProduct
+﻿namespace Catalog.API.CreateProduct
 {
     public record CreateProductCommand(string Name, List<string> Category, string Description, string ImagePath, decimal Price) : ICommand<CreateProductresult>;
     public record CreateProductresult(Guid Id);
