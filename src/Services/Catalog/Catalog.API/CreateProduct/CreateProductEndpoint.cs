@@ -1,12 +1,12 @@
 ﻿namespace Catalog.API.CreateProduct
 {
-    public record CreateCommandRequest(string Name, List<string> Categories, string Description, string ImagePath, decimal Price);
+    public record CreateCommandRequest(string Name, List<string> Category, string Description, string ImagePath, decimal Price);
     public record CreateCommandResponse(Guid Id);
     public static class CreateProductEndpoint
     {
         public static void MapCreateProductEndpoint(this IEndpointRouteBuilder endpointRouteBuilder)
         {
-            endpointRouteBuilder.MapPost("/api/product", async (CreateCommandRequest request, ISender sender) =>
+            endpointRouteBuilder.MapPost("/api/products", async (CreateCommandRequest request, ISender sender) =>
             {
                 var product = request.Adapt<CreateProductCommand>();
                 var result = await sender.Send(product);
