@@ -1,12 +1,12 @@
 ﻿namespace Catalog.API.Products.UpdateProduct
 {
-    public record UpdateProductrequest(Guid Id, string Name, List<string> Category, string Description, string ImagePath, decimal Price);
+    public record UpdateProductRequest(Guid Id, string Name, List<string> Category, string Description, string ImagePath, decimal Price);
     public record UpdateProductResponse(bool IsUpdated);
     public static class UpdateProductEndpoint
     {
         public static void MapUpdateProductEndpoint(this IEndpointRouteBuilder endpointRouteBuilder)
         {
-            endpointRouteBuilder.MapPut("api/products", async (UpdateProductrequest request, ISender sender) =>
+            endpointRouteBuilder.MapPut("api/products", async (UpdateProductRequest request, ISender sender) =>
             {
                 var command = request.Adapt<UpdateProductCommand>();
                 var result = await sender.Send(command);

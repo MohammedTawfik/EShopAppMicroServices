@@ -1,4 +1,5 @@
 using Catalog.API.Products.CreateProduct;
+using Catalog.API.Products.DeleteProduct;
 using Catalog.API.Products.GetProductByCategory;
 using Catalog.API.Products.GetProductById;
 using Catalog.API.Products.GetProducts;
@@ -24,5 +25,6 @@ app.MapGetProductsEndpoint();
 app.MapGetProductByIdEndpoint();
 app.MapGetProductsByCategoryEndpoint();
 app.MapUpdateProductEndpoint();
+app.MapDeleteProductEndpoint();
 
 app.Run();
