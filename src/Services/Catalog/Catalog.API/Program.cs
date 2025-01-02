@@ -2,6 +2,7 @@ using Catalog.API.Products.CreateProduct;
 using Catalog.API.Products.GetProductByCategory;
 using Catalog.API.Products.GetProductById;
 using Catalog.API.Products.GetProducts;
+using Catalog.API.Products.UpdateProduct;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -22,5 +23,6 @@ app.MapCreateProductEndpoint();
 app.MapGetProductsEndpoint();
 app.MapGetProductByIdEndpoint();
 app.MapGetProductsByCategoryEndpoint();
+app.MapUpdateProductEndpoint();
 
 app.Run();
