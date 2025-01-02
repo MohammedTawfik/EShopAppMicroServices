@@ -1,6 +1,6 @@
-using Catalog.API.CreateProduct;
-using Catalog.API.GetProductById;
-using Catalog.API.GetProducts;
+using Catalog.API.Products.CreateProduct;
+using Catalog.API.Products.GetProductById;
+using Catalog.API.Products.GetProducts;
 
 var builder = WebApplication.CreateBuilder(args);
 

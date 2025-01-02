@@ -1,4 +1,4 @@
-﻿namespace Catalog.API.CreateProduct
+﻿namespace Catalog.API.Products.CreateProduct
 {
     public record CreateCommandRequest(string Name, List<string> Category, string Description, string ImagePath, decimal Price);
     public record CreateCommandResponse(Guid Id);
