@@ -2,19 +2,28 @@
 {
     public record CreateProductCommand(string Name, List<string> Category, string Description, string ImagePath, decimal Price) : ICommand<CreateProductresult>;
     public record CreateProductresult(Guid Id);
-    public class CreateProductHandlerCommandHandler(IDocumentSession documentSession) : ICommandHandler<CreateProductCommand, CreateProductresult>
+
+    public class CreateProductHandlerCommandHandler
+        (IDocumentSession documentSession, IValidator<CreateProductCommand> validator)
+        : ICommandHandler<CreateProductCommand, CreateProductresult>
     {
-        public async Task<CreateProductresult> Handle(CreateProductCommand request, CancellationToken cancellationToken)
+        public async Task<CreateProductresult> Handle(CreateProductCommand command, CancellationToken cancellationToken)
         {
+            //Validate command
+            var validationResult = await validator.ValidateAsync(command, cancellationToken);
+            if (!validationResult.IsValid)
+            {
+                throw new ValidationException(validationResult.Errors);
+            }
             //Create productfrom request
             var product = new Product
             {
                 Id = Guid.NewGuid(),
-                Name = request.Name,
-                Category = request.Category,
-                Description = request.Description,
-                ImagePath = request.ImagePath,
-                Price = request.Price
+                Name = command.Name,
+                Category = command.Category,
+                Description = command.Description,
+                ImagePath = command.ImagePath,
+                Price = command.Price
             };
             //Save product to database
             documentSession.Store(product);
