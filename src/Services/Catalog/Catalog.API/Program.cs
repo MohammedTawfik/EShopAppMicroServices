@@ -4,12 +4,14 @@ using Catalog.API.Products.GetProductByCategory;
 using Catalog.API.Products.GetProductById;
 using Catalog.API.Products.GetProducts;
 using Catalog.API.Products.UpdateProduct;
+using Utilities.Behaviors;
 
 var builder = WebApplication.CreateBuilder(args);
 
 builder.Services.AddMediatR(config =>
 {
     config.RegisterServicesFromAssemblies(typeof(Program).Assembly);
+    config.AddOpenBehavior(typeof(ValidationBehavior<,>)); //Add the open behavior to the MediatR pipeline
 });
 
 builder.Services.AddValidatorsFromAssembly(typeof(Program).Assembly);

@@ -3,18 +3,13 @@
     public record CreateProductCommand(string Name, List<string> Category, string Description, string ImagePath, decimal Price) : ICommand<CreateProductresult>;
     public record CreateProductresult(Guid Id);
 
-    public class CreateProductHandlerCommandHandler
-        (IDocumentSession documentSession, IValidator<CreateProductCommand> validator)
+    public class CreateProductCommandHandler
+        (IDocumentSession documentSession, ILogger<CreateProductCommandHandler> logger)
         : ICommandHandler<CreateProductCommand, CreateProductresult>
     {
         public async Task<CreateProductresult> Handle(CreateProductCommand command, CancellationToken cancellationToken)
         {
-            //Validate command
-            var validationResult = await validator.ValidateAsync(command, cancellationToken);
-            if (!validationResult.IsValid)
-            {
-                throw new ValidationException(validationResult.Errors);
-            }
+            logger.LogInformation("CreateProductCommandHandler.Handle called with command {Name}", command);
             //Create productfrom request
             var product = new Product
             {
