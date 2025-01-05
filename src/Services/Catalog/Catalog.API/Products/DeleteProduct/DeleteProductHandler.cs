@@ -14,7 +14,7 @@ namespace Catalog.API.Products.DeleteProduct
             var product = await documentSession.LoadAsync<Product>(command.Id, cancellationToken);
             if (product is null)
             {
-                throw new ProductNotFoundException();
+                throw new ProductNotFoundException(command.Id);
             }
             documentSession.Delete(product);
             await documentSession.SaveChangesAsync(cancellationToken);
