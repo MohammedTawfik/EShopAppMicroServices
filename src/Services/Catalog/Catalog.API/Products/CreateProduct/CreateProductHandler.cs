@@ -4,12 +4,11 @@
     public record CreateProductresult(Guid Id);
 
     public class CreateProductCommandHandler
-        (IDocumentSession documentSession, ILogger<CreateProductCommandHandler> logger)
+        (IDocumentSession documentSession)
         : ICommandHandler<CreateProductCommand, CreateProductresult>
     {
         public async Task<CreateProductresult> Handle(CreateProductCommand command, CancellationToken cancellationToken)
         {
-            logger.LogInformation("CreateProductCommandHandler.Handle called with command {Name}", command);
             //Create productfrom request
             var product = new Product
             {

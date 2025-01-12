@@ -13,6 +13,7 @@ builder.Services.AddMediatR(config =>
 {
     config.RegisterServicesFromAssemblies(typeof(Program).Assembly);
     config.AddOpenBehavior(typeof(ValidationBehavior<,>)); //Add the open behavior to the MediatR pipeline
+    config.AddOpenBehavior(typeof(LoggingBehavior<,>));
 });
 
 builder.Services.AddValidatorsFromAssembly(typeof(Program).Assembly);
@@ -23,7 +24,6 @@ builder.Services.AddMarten(options =>
 }).UseLightweightSessions();
 
 builder.Services.AddExceptionHandler<CustomExceptionHandler>();
-
 var app = builder.Build();
 
 //Configure the HTTP request pipeline
