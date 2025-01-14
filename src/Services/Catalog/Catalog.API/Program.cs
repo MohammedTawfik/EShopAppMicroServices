@@ -5,6 +5,7 @@ using Catalog.API.Products.GetProductByCategory;
 using Catalog.API.Products.GetProductById;
 using Catalog.API.Products.GetProducts;
 using Catalog.API.Products.UpdateProduct;
+using HealthChecks.UI.Client;
 using Utilities.Behaviors;
 using Utilities.Exceptions.Handler;
 
@@ -30,6 +31,10 @@ if (builder.Environment.IsDevelopment())
 }
 
 builder.Services.AddExceptionHandler<CustomExceptionHandler>();
+
+builder.Services.AddHealthChecks()
+    .AddNpgSql(builder.Configuration.GetConnectionString("CatalogConnection")!);
+
 var app = builder.Build();
 
 //Configure the HTTP request pipeline
@@ -41,5 +46,10 @@ app.MapUpdateProductEndpoint();
 app.MapDeleteProductEndpoint();
 
 app.UseExceptionHandler(options => { });
-
+app.UseHealthChecks("/health",
+    new Microsoft.AspNetCore.Diagnostics.HealthChecks.HealthCheckOptions()
+    {
+        ResponseWriter = UIResponseWriter.WriteHealthCheckUIResponse
+    }
+    );
 app.Run();
